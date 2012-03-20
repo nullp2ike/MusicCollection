@@ -81,8 +81,12 @@ Tracklist.create(album: 3, trackname: "Koolis on vahva")
 connection.execute("DELETE FROM collections;")    
 connection.execute("DELETE FROM sqlite_sequence WHERE name = 'collections';")
 
+Owner.delete_all
+Owner.create(username: "Risko", password: "parool", email: "risko.ruus@gmail.com")
+Owner.create(username: "Kobras", password: "parool", email: "fraxid@msn.com")
+
 Collection.delete_all
-Collection.create(album: 1)
-Collection.create(album: 2)
-Collection.create(album: 3)
+Collection.create(album: 1, owner: 1)
+Collection.create(album: 2, owner: 1)
+Collection.create(album: 3, owner: 2)
 # . . .
