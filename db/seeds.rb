@@ -78,12 +78,15 @@ Tracklist.create(album: 3, trackname: "Opime puskarit tegema")
 Tracklist.create(album: 3, trackname: "Ma votsin viina")
 Tracklist.create(album: 3, trackname: "Koolis on vahva")
 
-connection.execute("DELETE FROM collections;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'collections';")
+connection.execute("DELETE FROM owners;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'owners';")
 
 Owner.delete_all
 Owner.create(username: "Risko", password: "parool", email: "risko.ruus@gmail.com")
 Owner.create(username: "Kobras", password: "parool", email: "fraxid@msn.com")
+
+connection.execute("DELETE FROM collections;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'collections';")
 
 Collection.delete_all
 Collection.create(album: 1, owner: 1)

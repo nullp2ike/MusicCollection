@@ -1,37 +1,47 @@
-<h1>Listing albums</h1>
+<h1>Minu muusikakogu</h1>
 
 <table>
-  <tr>
-    <th>Title</th>
-    <th>Year</th>
-    <th>Picture</th>
-    <th>Description</th>
-    <th>Artist</th>
-    <th>Label</th>
-    <th>Genre</th>
-    <th>Format</th>
-    <th></th>
-    <th></th>
-    <th></th>
+  <tr class="pealkiri">
+	<td></td>
+	<td>Kirjeldus</td>
+	<td>Pealkiri</td>
+	<td>Artist</td>
+	<td>Ilmumisaasta</td>
+	<td>Väljaandja</td>
+	<td>Stiil</td>
+	<td>Formaat</td>
   </tr>
-
 <% @albums.each do |album| %>
-  <tr>
-    <td><%= album.title %></td>
-    <td><%= album.year %></td>
-    <td><%= album.picture %></td>
-    <td><%= album.description %></td>
-    <td><%= album.artist %></td>
-    <td><%= album.label %></td>
-    <td><%= album.genre %></td>
-    <td><%= album.format %></td>
-    <td><%= link_to 'Show', album %></td>
-    <td><%= link_to 'Edit', edit_album_path(album) %></td>
-    <td><%= link_to 'Destroy', album, confirm: 'Are you sure?', method: :delete %></td>
+
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>" >
+	<td>
+      <%= image_tag(album.picture, class: 'list_image') %>
+    </td>
+
+	<td class="list_description" >
+	 	<dl>
+	 	<dd><%= truncate(strip_tags(album.description),
+	 	length: 40) %></dd>
+	 	</dl>
+	</td>
+	<td><%= album.title %></td>
+	<td><%= Artist.find(album.artist).artist %></td>
+	<td><%= album.year %></td>
+	<td><%= Label.find(album.label).label %></td>
+	<td><%= Genre.find(album.genre).genre %></td>
+    <td><%= Format.find(album.format).format %></td>
+	
+	<td class="list_actions" >
+	 	<%= link_to 'Näita', album %><br />
+	 	<%= link_to 'Muuda', edit_album_path(album) %><br />
+	 	<%= link_to 'Kustuta', album,
+	 	confirm: 'Kas oled kindel?',
+	 	method: :delete %>
+	</td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Album', new_album_path %>
+<%= link_to 'Lisa uus album', new_album_path %>

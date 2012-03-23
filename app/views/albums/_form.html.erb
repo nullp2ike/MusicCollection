@@ -12,38 +12,45 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label "Pealkiri" %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :year %><br />
-    <%= f.number_field :year %>
+    <%= f.label "Aasta" %><br />
+    <%= f.select(:year, 1900..Time.now.year, :selected=>(f.object.year || Time.now.year)) %>
   </div>
   <div class="field">
-    <%= f.label :picture %><br />
+    <%= f.label "Pilt" %><br />
     <%= f.text_field :picture %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label "Kirjeldus" %><br />
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :artist %><br />
-    <%= f.number_field :artist %>
+    <%= f.label "Esitaja" %><br />
+    <%= collection_select(:album, :artist, Artist.all, :id, :artist,{ :include_blank => true }) %>
   </div>
   <div class="field">
-    <%= f.label :label %><br />
-    <%= f.number_field :label %>
+    <%= f.label "Väljaandja" %><br />
+    <%= collection_select(:album, :label, Label.all, :id, :label,{ :include_blank => true }) %>
   </div>
   <div class="field">
-    <%= f.label :genre %><br />
-    <%= f.number_field :genre %>
+    <%= f.label "Stiil" %><br />
+	<%= collection_select(:album, :genre, Genre.all, :id, :genre,{ :include_blank => true }) %>
   </div>
   <div class="field">
-    <%= f.label :format %><br />
-    <%= f.number_field :format %>
+	<tr>
+		<td>
+    		<%= f.label "Formaat" %><br />
+    		<%= collection_select(:album, :format, Format.all, :id, :format,{ :include_blank => true}) %>
+		</td>
+		<td>
+			<%= f.text_field :format %>
+		</td>
+	</tr>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Loo album" %>
   </div>
 <% end %>
