@@ -4,4 +4,5 @@ class Album < ActiveRecord::Base
   has_many :formats 
   has_many :artists 
   has_many :labels
+  belongs_to :tracklists
 end

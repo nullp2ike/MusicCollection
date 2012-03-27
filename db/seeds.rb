@@ -66,17 +66,17 @@ connection.execute("DELETE FROM tracklists;")
 connection.execute("DELETE FROM sqlite_sequence WHERE name = 'tracklists';")
 
 Tracklist.delete_all
-Tracklist.create(album: 1, trackname: "Mute the birds")
-Tracklist.create(album: 1, trackname: "Springsister")
-Tracklist.create(album: 1, trackname: "Doctor Optimism")
+Tracklist.create(album: 1, tracknr: 1, trackname: "Mute the birds")
+Tracklist.create(album: 1, tracknr: 2, trackname: "Springsister")
+Tracklist.create(album: 1, tracknr: 3, trackname: "Doctor Optimism")
 
-Tracklist.create(album: 2, trackname: "Mona Lisa naeratus")
-Tracklist.create(album: 2, trackname: "Soolasem kui sool")
-Tracklist.create(album: 2, trackname: "Tants klavesiini umber")
+Tracklist.create(album: 2, tracknr: 1, trackname: "Mona Lisa naeratus")
+Tracklist.create(album: 2, tracknr: 2, trackname: "Soolasem kui sool")
+Tracklist.create(album: 2, tracknr: 3, trackname: "Tants klavesiini umber")
 
-Tracklist.create(album: 3, trackname: "Opime puskarit tegema")
-Tracklist.create(album: 3, trackname: "Ma votsin viina")
-Tracklist.create(album: 3, trackname: "Koolis on vahva")
+Tracklist.create(album: 3, tracknr: 1, trackname: "Opime puskarit tegema")
+Tracklist.create(album: 3, tracknr: 2, trackname: "Ma votsin viina")
+Tracklist.create(album: 3, tracknr: 3, trackname: "Koolis on vahva")
 
 connection.execute("DELETE FROM owners;")    
 connection.execute("DELETE FROM sqlite_sequence WHERE name = 'owners';")
