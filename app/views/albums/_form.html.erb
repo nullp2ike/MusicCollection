@@ -1,4 +1,4 @@
-<%= form_for(@album) do |f| %>
+<%= form_for((@album), :html => { :multipart => true }) do |f| %>
   <% if @album.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h2>
@@ -19,38 +19,51 @@
     <%= f.label "Aasta" %><br />
     <%= f.select(:year, 1900..Time.now.year, :selected=>(f.object.year || Time.now.year)) %>
   </div>
-  <div class="field">
-    <%= f.label "Pilt" %><br />
-    <%= f.text_field :picture %>
+  <div>
+    <%= f.label :photo, "Pilt" %>
+    <%= f.file_field :photo %>
   </div>
   <div class="field">
     <%= f.label "Kirjeldus" %><br />
-    <%= f.text_field :description %>
+    <%= f.text_area :description, :rows => 10 %>
   </div>
   <div class="field">
     <%= f.label "Esitaja" %><br />
-    <%= collection_select(:album, :artist, Artist.all, :id, :artist,{ :include_blank => true }) %>
+    <%= f.text_field :artist_name, data: {autocomplete_source:
+			Artist.order(:name).map(&:name)} %>
   </div>
   <div class="field">
-    <%= f.label "Väljaandja" %><br />
-    <%= collection_select(:album, :label, Label.all, :id, :label,{ :include_blank => true }) %>
+  <%= f.label "Väljaandja" %><br />
+  <%= f.text_field :label_name, data: {autocomplete_source:
+	  Label.order(:name).map(&:name)} %>
   </div>
-  <div class="field">
-    <%= f.label "Stiil" %><br />
-	<%= collection_select(:album, :genre, Genre.all, :id, :genre,{ :include_blank => true }) %>
-  </div>
+	<div class="field">
+  <%= f.label "Stiil" %><br />
+	<%= f.text_field :genre_name, data: {autocomplete_source:
+		Genre.order(:name).map(&:name)} %>
+	</div>
+
   <div class="field">
 	<tr>
 		<td>
-    		<%= f.label "Formaat" %><br />
-    		<%= collection_select(:album, :format, Format.all, :id, :format,{ :include_blank => true}) %>
-		</td>
-		<td>
-			<%= f.text_field :format %>
+    <%= f.label "Formaat" %><br />
+    <%= f.text_field :format_name, data: {autocomplete_source:
+		  Format.order(:name).map(&:name)} %>
 		</td>
 	</tr>
+	<br>
+	<br>
+	<b>Loo nimed</b>
+	<br>
+	<%= f.fields_for :tracks do |builder,index| %>
+		<p>
+			<%= builder.label :title%><br />
+			<%= builder.text_area :title, :rows => 1 %>
+		</p>
+  <% end %>
+	
   </div>
   <div class="actions">
-    <%= f.submit "Loo album" %>
+    <%= f.submit "Salvesta" %>
   </div>
 <% end %>

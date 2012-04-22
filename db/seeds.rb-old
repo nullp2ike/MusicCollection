@@ -1,0 +1,95 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Emanuel', city: cities.first)
+
+connection = ActiveRecord::Base.connection();
+connection.execute("DELETE FROM genres;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'genres';")
+
+Genre.delete_all
+genres = Genre.create([{ genre: 'Shoegaze' }, {genre: 'Indie'},{genre: 'Pop'}])
+
+connection.execute("DELETE FROM labels;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'labels';")
+
+Label.delete_all
+labels = Label.create([{label: 'Seksound'},{label: 'Mortimer Snerd'},{label: 'Self released'}])
+
+connection.execute("DELETE FROM artists;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'artists';")
+
+Artist.delete_all
+artists = Artist.create([{artist: 'Vaiko Eplik'},{artist: 'Pia Fraus'},{artist: 'Onu Bella'}])
+
+connection.execute("DELETE FROM formats;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'formats';")
+
+Format.delete_all
+formats = Format.create([{format: 'CD'},{format: 'Kassett'},{format: 'Vinuul'}])
+
+connection.execute("DELETE FROM albums;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'albums';")
+
+Album.delete_all
+Album.create(title: 'After Summer',
+year: 2008,
+picture: 'pf_as_08.jpg',
+description: 'Viimane Pia Frausi album',
+artist_id: 2,
+label_id: 1,
+genre_id: 1,
+format_id: 1)
+
+Album.create(title: 'V',
+year: 2008,
+picture: 've_v_11.jpg',
+description: 'Viies Vaiko Epliku album',
+artist_id: 1,
+label_id: 2,
+genre_id: 2,
+format_id: 3)
+
+Album.create(title: 'Ma votsin viina',
+year: 1993,
+picture: 'ob_mvv_93.jpg',
+description: 'Legendaarne Onu Bella album',
+artist_id: 3,
+label_id: 3,
+genre_id: 3,
+format_id: 2)
+
+connection.execute("DELETE FROM tracklists;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'tracklists';")
+
+Tracklist.delete_all
+Tracklist.create(album_id: 1, track_id: 1)
+Tracklist.create(album_id: 1, track_id: 2)
+Tracklist.create(album_id: 1, track_id: 3)
+
+Tracklist.create(album_id: 2, track_id: 4)
+Tracklist.create(album_id: 2, track_id: 5)
+Tracklist.create(album_id: 2, track_id: 6)
+
+Tracklist.create(album_id: 3, track_id: 7)
+Tracklist.create(album_id: 3, track_id: 8)
+Tracklist.create(album_id: 3, track_id: 9)
+
+connection.execute("DELETE FROM owners;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'owners';")
+
+Owner.delete_all
+Owner.create(username: "Risko", password: "parool", email: "risko.ruus@gmail.com")
+Owner.create(username: "Kobras", password: "parool", email: "fraxid@msn.com")
+
+connection.execute("DELETE FROM collections;")    
+connection.execute("DELETE FROM sqlite_sequence WHERE name = 'collections';")
+
+Collection.delete_all
+Collection.create(album: 1, owner: 1)
+Collection.create(album: 2, owner: 1)
+Collection.create(album: 3, owner: 2)
+# . . .

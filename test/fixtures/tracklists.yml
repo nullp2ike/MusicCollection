@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  album: 1
-  tracknr: 1
-  trackname: MyString
+  album_id: 1
+  track_id: 1
 
 two:
-  album: 1
-  tracknr: 1
-  trackname: MyString
+  album_id: 1
+  track_id: 1

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -6,90 +7,48 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-connection = ActiveRecord::Base.connection();
-connection.execute("DELETE FROM genres;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'genres';")
-
-Genre.delete_all
-genres = Genre.create([{ genre: 'Shoegaze' }, {genre: 'Indie'},{genre: 'Pop'}])
-
-connection.execute("DELETE FROM labels;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'labels';")
-
-Label.delete_all
-labels = Label.create([{label: 'Seksound'},{label: 'Mortimer Snerd'},{label: 'Self released'}])
-
-connection.execute("DELETE FROM artists;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'artists';")
-
 Artist.delete_all
-artists = Artist.create([{artist: 'Vaiko Eplik'},{artist: 'Pia Fraus'},{artist: 'Onu Bella'}])
-
-connection.execute("DELETE FROM formats;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'formats';")
-
-Format.delete_all
-formats = Format.create([{format: 'CD'},{format: 'Kassett'},{format: 'Vinuul'}])
-
-connection.execute("DELETE FROM albums;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'albums';")
-
 Album.delete_all
-Album.create(title: 'After Summer',
-year: 2008,
-picture: 'pf_as_08.jpg',
-description: 'Viimane Pia Frausi album',
-artist: 2,
-label: 1,
-genre: 1,
-format: 1)
+Track.delete_all
+Genre.delete_all
+Label.delete_all
+Format.delete_all
 
-Album.create(title: 'V',
-year: 2008,
-picture: 've_v_11.jpg',
-description: 'Viies Vaiko Epliku album',
-artist: 1,
-label: 2,
-genre: 2,
-format: 3)
+artist = Artist.find_or_create_by_name('Onu Bella')
+genre = Genre.find_or_create_by_name('Eesti')
+label = Label.find_or_create_by_name('Valindo')
+format = Format.find_or_create_by_name('Kassett')
+album = Album.find_or_create_by_artist_id_and_genre_id_and_label_id_and_format_id_and_title_and_year_and_picture_and_description(artist.id, genre.id, label.id, format.id,'Ma võtsin viina',1992,'ob_mvv_93.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at sem urna, vitae convallis nulla. Fusce ut lorem id ante egestas hendrerit. Suspendisse laoreet tellus eu turpis imperdiet vitae elementum nulla mollis. Sed justo orci, egestas id bibendum imperdiet, viverra sed velit. Morbi quis neque a nisl egestas sollicitudin. Nam.')
 
-Album.create(title: 'Ma votsin viina',
-year: 1993,
-picture: 'ob_mvv_93.jpg',
-description: 'Legendaarne Onu Bella album',
-artist: 3,
-label: 3,
-genre: 3,
-format: 2)
 
-connection.execute("DELETE FROM tracklists;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'tracklists';")
+%w(Aisakell 
+  Uude\ maailma\ minek 
+  Seksikas\ poiss).each do |name|
+  Track.find_or_create_by_album_id_and_title(album.id, name)
+end
 
-Tracklist.delete_all
-Tracklist.create(album: 1, tracknr: 1, trackname: "Mute the birds")
-Tracklist.create(album: 1, tracknr: 2, trackname: "Springsister")
-Tracklist.create(album: 1, tracknr: 3, trackname: "Doctor Optimism")
+artist = Artist.find_or_create_by_name('Pia Fraus')
+genre = Genre.find_or_create_by_name('Shoegaze')
+label = Label.find_or_create_by_name('Seksound')
+format = Format.find_or_create_by_name('CD')
+album = Album.find_or_create_by_artist_id_and_genre_id_and_label_id_and_format_id_and_title_and_year_and_picture_and_description(artist.id, genre.id, label.id, format.id,'After Summer',2008,'pf_as_08.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at sem urna, vitae convallis nulla. Fusce ut lorem id ante egestas hendrerit. Suspendisse laoreet tellus eu turpis imperdiet vitae elementum nulla mollis. Sed justo orci, egestas id bibendum imperdiet, viverra sed velit. Morbi quis neque a nisl egestas sollicitudin. Nam.')
 
-Tracklist.create(album: 2, tracknr: 1, trackname: "Mona Lisa naeratus")
-Tracklist.create(album: 2, tracknr: 2, trackname: "Soolasem kui sool")
-Tracklist.create(album: 2, tracknr: 3, trackname: "Tants klavesiini umber")
 
-Tracklist.create(album: 3, tracknr: 1, trackname: "Opime puskarit tegema")
-Tracklist.create(album: 3, tracknr: 2, trackname: "Ma votsin viina")
-Tracklist.create(album: 3, tracknr: 3, trackname: "Koolis on vahva")
+%w(Springsister
+  Yennisey 
+  Sailing\ Yes).each do |name|
+  Track.find_or_create_by_album_id_and_title(album.id, name)
+end
 
-connection.execute("DELETE FROM owners;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'owners';")
+artist = Artist.find_or_create_by_name('Radar')
+genre = Genre.find_or_create_by_name('Fusion')
+label = Label.find_or_create_by_name('Melodija')
+format = Format.find_or_create_by_name('Vinüül')
+album = Album.find_or_create_by_artist_id_and_genre_id_and_label_id_and_format_id_and_title_and_year_and_picture_and_description(artist.id, genre.id, label.id, format.id,'Balti Rannik',1987,'ra_br_87.jpg','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at sem urna, vitae convallis nulla. Fusce ut lorem id ante egestas hendrerit. Suspendisse laoreet tellus eu turpis imperdiet vitae elementum nulla mollis. Sed justo orci, egestas id bibendum imperdiet, viverra sed velit. Morbi quis neque a nisl egestas sollicitudin. Nam.')
 
-Owner.delete_all
-Owner.create(username: "Risko", password: "parool", email: "risko.ruus@gmail.com")
-Owner.create(username: "Kobras", password: "parool", email: "fraxid@msn.com")
 
-connection.execute("DELETE FROM collections;")    
-connection.execute("DELETE FROM sqlite_sequence WHERE name = 'collections';")
-
-Collection.delete_all
-Collection.create(album: 1, owner: 1)
-Collection.create(album: 2, owner: 1)
-Collection.create(album: 3, owner: 2)
-# . . .
+%w(Viraaž
+  Tuhkvalgus 
+  Päikesepiste).each do |name|
+  Track.find_or_create_by_album_id_and_title(album.id, name)
+end

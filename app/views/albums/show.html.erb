@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<div class= "div_info" >
 <p>
   <b>Pealkiri:</b>
   <%= @album.title %>
@@ -11,8 +11,7 @@
 </p>
 
 <p>
-  <b>Pilt:</b>
-  <%= @album.picture %>
+   <%= image_tag(@album.photo.url, class: 'show_image') %>
 </p>
 
 <p>
@@ -22,29 +21,33 @@
 
 <p>
   <b>Esitaja:</b>
-  <%= @album.artist %>
+  <%= @album.artist_name %>
 </p>
 
 <p>
   <b>Väljaandja:</b>
-  <%= @album.label %>
+  <%= @album.label_name %>
 </p>
 
 <p>
   <b>Stiil:</b>
-  <%= @album.genre %>
+  <%= @album.genre_name %>
 </p>
 
 <p>
   <b>Formaat:</b>
-  <%= @album.format %>
+  <%= @album.format_name %>
 </p>
-
-<p>
-  <b>Tracklist:</b>
-	<br>
-	
-</p>
-
 <%= link_to 'Muuda', edit_album_path(@album) %> |
 <%= link_to 'Tagasi', albums_path %>
+</div>
+<div class="div_tracklist">
+<p>
+  <b>Lugude nimekiri:</b>
+<br>
+<% @album.tracks.each do |track| %>
+	<br> <%= track.title %>
+<% end %>
+</p>
+</div>
+

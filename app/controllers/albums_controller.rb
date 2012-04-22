@@ -1,3 +1,4 @@
+ # encoding: utf-8
 class AlbumsController < ApplicationController
   # GET /albums
   # GET /albums.json
@@ -26,6 +27,10 @@ class AlbumsController < ApplicationController
   def new
     @album = Album.new
 
+    3.times do
+      @album.tracks.build
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @album }
@@ -44,7 +49,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.save
-        format.html { redirect_to @album, notice: 'Album was successfully created.' }
+        format.html { redirect_to @album, notice: 'Albumi loomine õnnestus.' }
         format.json { render json: @album, status: :created, location: @album }
       else
         format.html { render action: "new" }
@@ -60,7 +65,7 @@ class AlbumsController < ApplicationController
 
     respond_to do |format|
       if @album.update_attributes(params[:album])
-        format.html { redirect_to @album, notice: 'Album was successfully updated.' }
+        format.html { redirect_to @album, notice: 'Albumi uuendamine õnnestus' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

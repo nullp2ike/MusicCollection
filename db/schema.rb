@@ -11,66 +11,56 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120320210744) do
+ActiveRecord::Schema.define(:version => 20120420112932) do
 
   create_table "albums", :force => true do |t|
-    t.string   "title"
-    t.integer  "year"
+    t.string   "title",                           :null => false
+    t.integer  "artist_id"
+    t.integer  "year",               :limit => 4
     t.string   "picture"
-    t.string   "description"
-    t.integer  "artist"
-    t.integer  "label"
-    t.integer  "genre"
-    t.integer  "format"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "description"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "label_id"
+    t.integer  "genre_id"
+    t.integer  "format_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "artists", :force => true do |t|
-    t.string   "artist"
+    t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "collections", :force => true do |t|
-    t.integer  "album"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "owner"
   end
 
   create_table "formats", :force => true do |t|
-    t.string   "format"
+    t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "genres", :force => true do |t|
-    t.string   "genre"
+    t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
   create_table "labels", :force => true do |t|
-    t.string   "label"
+    t.string   "name",       :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "owners", :force => true do |t|
-    t.string   "username"
-    t.string   "password"
-    t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "tracklists", :force => true do |t|
-    t.integer  "album"
-    t.integer  "tracknr"
-    t.string   "trackname"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "tracks", :force => true do |t|
+    t.string   "title",                              :null => false
+    t.integer  "album_id"
+    t.integer  "artist_id"
+    t.integer  "duration_in_seconds", :default => 0
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
 end

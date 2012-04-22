@@ -4,6 +4,7 @@ gem 'rails', '3.2.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
 
 gem 'sqlite3'
 
@@ -21,6 +22,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem 'rails3-jquery-autocomplete'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

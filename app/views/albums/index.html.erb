@@ -15,7 +15,7 @@
 
   <tr class="<%= cycle('list_line_odd', 'list_line_even') %>" >
 	<td>
-      <%= image_tag(album.picture, class: 'list_image') %>
+      <%= image_tag(album.photo.url, class: 'list_image') %>
     </td>
 
 	<td class="list_description" >
@@ -25,11 +25,11 @@
 	 	</dl>
 	</td>
 	<td><%= album.title %></td>
-	<td><%= Artist.find(album.artist).artist %></td>
+	<td><%= album.artist_name %></td>
 	<td><%= album.year %></td>
-	<td><%= Label.find(album.label).label %></td>
-	<td><%= Genre.find(album.genre).genre %></td>
-    <td><%= Format.find(album.format).format %></td>
+	<td><%= album.label_name %></td>
+	<td><%= album.genre_name %></td>
+  <td><%= album.format_name %></td>
 	
 	<td class="list_actions" >
 	 	<%= link_to 'Näita', album %><br />
