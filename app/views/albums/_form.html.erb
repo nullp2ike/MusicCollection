@@ -51,18 +51,17 @@
 		  Format.order(:name).map(&:name)} %>
 		</td>
 	</tr>
-	<br>
-	<br>
+  </div>
 	<b>Loo nimed</b>
 	<br>
-	<%= f.fields_for :tracks do |builder,index| %>
-		<p>
-			<%= builder.label :title%><br />
-			<%= builder.text_area :title, :rows => 1 %>
-		</p>
-  <% end %>
-	
-  </div>
+	<div class="fields">
+	<%= f.fields_for :tracks do |builder| %>
+		<%= render "track_fields", :f => builder %>
+	<% end %>	
+	<p><%= link_to_add_fields "Lisa lugu", f, :tracks %></p>
+	</div>
+	<br>
+	<br>
   <div class="actions">
     <%= f.submit "Salvesta" %>
   </div>

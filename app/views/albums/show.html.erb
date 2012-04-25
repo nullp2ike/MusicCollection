@@ -45,9 +45,11 @@
 <p>
   <b>Lugude nimekiri:</b>
 <br>
+<ol>
 <% @album.tracks.each do |track| %>
-	<br> <%= track.title %>
+	<li> <%= track.title %> </li>
 <% end %>
+</ol>
 </p>
 </div>
 

@@ -1,5 +1,5 @@
 class Album < ActiveRecord::Base
-  validates :title,:year,:description,:artist_id,:label_id,:genre_id,:format_id, presence: true
+  #validates :title,:year,:description,:artist_id,:label_id,:genre_id,:format_id, presence: true
   
   belongs_to :artist
   belongs_to :label
@@ -7,7 +7,7 @@ class Album < ActiveRecord::Base
   belongs_to :format
   has_many :tracks
 
-  accepts_nested_attributes_for :tracks, :reject_if => lambda { |a| a[:title].blank? }
+  accepts_nested_attributes_for :tracks, :reject_if => lambda { |a| a[:title].blank? }, :allow_destroy => true
   
   has_attached_file :photo,
   :url => "/assets/images/:id/:style/:basename.:extension",
