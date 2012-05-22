@@ -54,12 +54,15 @@
   </div>
 	<b>Loo nimed</b>
 	<br>
-	<div class="fields">
+	<%= f.label :order_number, "Nr./" %>
+	<%= f.label :title, "Loo nimi/" %>
+	<%= f.label :artist_id, "Esitaja/" %>
+	<%= f.label :minutes, "Minutit" %>
+	<%= f.label :seconds, "Sekundit" %>
 	<%= f.fields_for :tracks do |builder| %>
-		<%= render "track_fields", :f => builder %>
-	<% end %>	
+		<%= render "track_fields", :f => builder %> 
+	<% end %>
 	<p><%= link_to_add_fields "Lisa lugu", f, :tracks %></p>
-	</div>
 	<br>
 	<br>
   <div class="actions">

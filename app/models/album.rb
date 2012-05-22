@@ -1,6 +1,5 @@
 class Album < ActiveRecord::Base
-  #validates :title,:year,:description,:artist_id,:label_id,:genre_id,:format_id, presence: true
-  
+  validates :title,:year,:description,:artist_id,:label_id,:genre_id,:format_id, presence: true
   belongs_to :artist
   belongs_to :label
   belongs_to :genre
@@ -48,4 +47,11 @@ class Album < ActiveRecord::Base
     self.format = Format.find_or_create_by_name(name) if name.present?
   end
   
+  def self.search(search)
+    if search
+      where('title LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
 end

@@ -9,7 +9,10 @@ module ApplicationHelper
     end  
     link_to_function(name, ("add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")"))  
   end
-  def convert_seconds_to_time(seconds, f)
-    Time.at(seconds).gmtime.strftime('%R:%S')
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
   end
 end

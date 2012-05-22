@@ -1,10 +1,10 @@
 <div class="fields">  
-  <p>  
-    <%= f.label :title, "Loo nimi" %>  
-    <%= link_to_remove_fields "remove", f %><br />  
+  <p>
+		<%= f.text_field :order_number, :size=> 2 %> 
     <%= f.text_field :title %>
-		<%= f.text_field :duration_in_seconds %>
-		 <br />
-		 
-  </p>   
+		<%= f.text_field :artist_id %>
+		<%= f.select(:minutes, (0..99), :selected=>(f.object.minutes)) %>
+		<%= f.select(:seconds, (0..59), :selected=>(f.object.seconds)) %>
+		<%= link_to_remove_fields "eemalda", f %>
+  </p>
 </div>

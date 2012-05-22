@@ -23,7 +23,6 @@
   }
   .div_tracklist {
     float:left;
-    width:150px;
   }
   .pealkiri {
 	font-weight:  bold;
@@ -83,4 +82,16 @@ ul.ui-autocomplete {
       background-color: #FFFCB2;
     }
   }
+}
+.ilus th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.ilus th .asc { 
+  background-image: url(/assets/images/up_arrow.gif); 
+}
+
+.ilus th .desc { 
+  background-image: url(/assets/images/down_arrow.gif); 
 }

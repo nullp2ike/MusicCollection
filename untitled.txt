@@ -1,0 +1,2 @@
+1. tühi long desc - tühi tooltip
+2. salvestasin ainult tühiku - OK

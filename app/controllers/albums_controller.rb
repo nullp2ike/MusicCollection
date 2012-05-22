@@ -1,10 +1,11 @@
  # encoding: utf-8
 class AlbumsController < ApplicationController
+  before_filter :authenticate, :only => [:new, :edit, :destroy, :create]
+  helper_method :sort_column, :sort_direction
   # GET /albums
   # GET /albums.json
   def index
-    @albums = Album.all
-
+   @albums = Album.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(:per_page => 5, :page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @albums }
@@ -85,4 +86,21 @@ class AlbumsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  def sort_column
+    Album.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
+  
+  protected
+    def authenticate
+      authenticate_or_request_with_http_basic do |username, password|
+        username == "risko" && password == "parool"
+      end
+    end
+    
 end

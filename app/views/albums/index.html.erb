@@ -1,15 +1,24 @@
 <h1>Minu muusikakogu</h1>
 
-<table>
+<%= form_tag albums_path, :method => 'get' do %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Otsi pealkirjast", :name => nil %>
+  </p>
+<% end %>
+
+<table class ="ilus">
   <tr class="pealkiri">
-	<td></td>
-	<td>Kirjeldus</td>
-	<td>Pealkiri</td>
-	<td>Artist</td>
-	<td>Ilmumisaasta</td>
-	<td>Väljaandja</td>
-	<td>Stiil</td>
-	<td>Formaat</td>
+		<th></th>
+		<th><%= sortable "description", "Kirjeldus" %></th>
+		<th><%= sortable "title", "Pealkiri" %></th>
+		<th><%= sortable "artist_name", "Artist" %></th>
+		<th><%= sortable "year", "Ilmumisaasta" %></th>
+		<th><%= sortable "label_name", "Väljaandja" %></th>
+		<th><%= sortable "genre_name", "Stiil" %></th>
+		<th><%= sortable "format_name", "Formaat" %></th>
   </tr>
 <% @albums.each do |album| %>
 
@@ -44,4 +53,5 @@
 
 <br />
 
+<%= will_paginate @albums, :previous_label => '<<', :next_label => '>>' %>
 <%= link_to 'Lisa uus album', new_album_path %>

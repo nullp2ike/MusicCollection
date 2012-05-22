@@ -10,3 +10,6 @@ jQuery ->
     source: $('#album_artist_name').data('autocomplete-source')
   $('#album_label_name').autocomplete
     source: $('#album_label_name').data('autocomplete-source')
+  $('#track_artist_name').autocomplete
+    source: $('#track_artist_name').data('autocomplete-source')
+

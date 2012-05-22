@@ -42,14 +42,16 @@
 <%= link_to 'Tagasi', albums_path %>
 </div>
 <div class="div_tracklist">
-<p>
-  <b>Lugude nimekiri:</b>
-<br>
-<ol>
-<% @album.tracks.each do |track| %>
-	<li> <%= track.title %> </li>
-<% end %>
-</ol>
-</p>
+	<p>
+  	<b>Lugude nimekiri:</b>
+	</p>
+	<% @album.tracks.each do |track| %>
+	<%= track.order_number %>.
+	<%= track.title %>
+	<%= track.artist_id %>
+	<%= track.minutes %>m
+	<%= track.seconds %>s
+	<br>
+	<% end %>
 </div>
 
